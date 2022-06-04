@@ -4,6 +4,7 @@ import com.server.graph.BipartiteGraph;
 import com.server.graph.Cupid;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class UpperPanel extends JPanel{
@@ -11,7 +12,7 @@ public class UpperPanel extends JPanel{
     JButton generate;
     JSpinner spinner;
     JButton solveAndSave;
-    BipartiteGraph graph;
+
 
     public UpperPanel(GraphicApplication graphicApplication) {
         this.graphicApplication = graphicApplication;
@@ -32,8 +33,15 @@ public class UpperPanel extends JPanel{
     }
 
     private void addConnectionsAndSave(ActionEvent actionEvent) {
-        new Cupid(graph);
-        showPairings(graph);
+        graphicApplication.canvas.setSolvePressed(true);
+
+        //generatePreferences(actionEvent);
+
+        new Cupid(graphicApplication.getGraph());
+        showPairings(graphicApplication.getGraph());
+
+        graphicApplication.canvas.init(getCouplesNo());
+        SwingUtilities.updateComponentTreeUI(graphicApplication);
     }
 
     private void showPairings(BipartiteGraph graph) {
@@ -42,13 +50,15 @@ public class UpperPanel extends JPanel{
     }
 
     private void generatePreferences(ActionEvent actionEvent) {
-        graph = new BipartiteGraph();
+
+        graphicApplication.canvas.setSolvePressed(false);
+
+        graphicApplication.setGraph(new BipartiteGraph());
 
         graphicApplication.canvas.init(getCouplesNo());
         SwingUtilities.updateComponentTreeUI(graphicApplication);
 
-        graph.generateRandom((Integer) spinner.getValue());
-        //apelare functie care afsieaza preferintele din graph
+        graphicApplication.getGraph().generateRandom((Integer) spinner.getValue());
     }
 
     public int getCouplesNo(){
