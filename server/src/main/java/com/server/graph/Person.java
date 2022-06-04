@@ -28,6 +28,17 @@ public abstract class Person <T>{
         this.name = name;
     }
 
+    public String getPreferencesAsString() {
+        StringBuilder result = new StringBuilder();
+        result.append("[ ");
+
+        for(T person : getOrderedPreferences()) {
+            result.append(((Person)person).getName() + ' ');
+        }
+        result.append(']');
+        return result.toString();
+    }
+
 
     @Override
     public String toString() {
