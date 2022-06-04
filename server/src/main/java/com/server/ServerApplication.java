@@ -1,6 +1,11 @@
 package com.server;
 
+
 import graphic.GraphicApplication;
+
+import com.server.graph.BipartiteGraph;
+import com.server.model.Server;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,10 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ServerApplication {
 
     public static void main(String[] args) {
-        int counter = 1 ;
-        //SpringApplication.run(ServerApplication.class, args);
-        new GraphicApplication(counter++).setVisible(true);
-        //new GraphicApplication(counter++).setVisible(true);
-    }
+    //SpringApplication.run(ServerApplication.class, args);
 
+    new Server(6666);
+
+    }
 }
