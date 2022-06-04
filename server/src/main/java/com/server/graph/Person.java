@@ -4,27 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Person <T>{
-    char name;
+    String name;
     List<T> orderedPreferences = new ArrayList<>();
-    T partner;
+    String partnerName;
 
     public List<T> getOrderedPreferences() {
         return orderedPreferences;
     }
 
-    public T getPartner() {
-        return partner;
+    public String getPartner() {
+        return partnerName;
     }
 
-    public char getName() {
+    public String getName() {
         return name;
     }
 
-    public void setPartner(T partner) {
-        this.partner = partner;
+    public void setPartner(String partner) {
+        this.partnerName = partner;
     }
 
-    public void setName(char name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -33,7 +33,7 @@ public abstract class Person <T>{
     public String toString() {
         return "Person{" +
                 "name=" + name +
-                ", partner=" + partner +
+                ", partner=" + partnerName +
                 '}';
     }
 }

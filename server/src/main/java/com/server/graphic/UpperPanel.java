@@ -1,6 +1,7 @@
-package graphic;
+package com.server.graphic;
 
 import com.server.graph.BipartiteGraph;
+import com.server.graph.Cupid;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -31,8 +32,13 @@ public class UpperPanel extends JPanel{
     }
 
     private void addConnectionsAndSave(ActionEvent actionEvent) {
-        //apelare cupid
-        //afisare perechi
+        new Cupid(graph);
+        showPairings(graph);
+    }
+
+    private void showPairings(BipartiteGraph graph) {
+        // de implementat afisarea perechilor person - partner
+        graph.printPairings();
     }
 
     private void generatePreferences(ActionEvent actionEvent) {

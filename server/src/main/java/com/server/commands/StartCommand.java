@@ -1,8 +1,7 @@
 package com.server.commands;
 
-import com.server.graph.BipartiteGraph;
 import com.server.model.Pigeon;
-import graphic.GraphicApplication;
+import com.server.graphic.GraphicApplication;
 
 import java.net.Socket;
 

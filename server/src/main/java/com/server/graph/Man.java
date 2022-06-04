@@ -1,7 +1,7 @@
 package com.server.graph;
 
 public class Man extends Person<Woman>{
-    Man(char name) {
+    Man(String name) {
         super.setName(name);
     }
 }
