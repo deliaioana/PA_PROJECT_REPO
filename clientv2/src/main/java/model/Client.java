@@ -13,7 +13,7 @@ public class Client {
     private Boolean workingSocket = true;
     private int clientNr = 0;
 
-    Client(String address, int portNumber) {
+    public Client(String address, int portNumber) {
 
         try {
             socket = new Socket(address, portNumber);

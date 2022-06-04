@@ -12,7 +12,7 @@ public class Server {
     private ServerSocket server;
     private DataOutputStream outputStream;
     private static boolean serverRunning = true;
-
+    private int counter = 0;
 
     public static void stopServer(){
         serverRunning = false;
@@ -27,7 +27,7 @@ public class Server {
             while(serverRunning) {
                 socket = server.accept();
                 System.out.println("A client connected.");
-                new CommunicatorWithClients(socket).start();
+                new CommunicatorWithClients(socket, ++counter).start();
             }
             try {
                 outputStream = new DataOutputStream(socket.getOutputStream());

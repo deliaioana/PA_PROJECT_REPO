@@ -17,9 +17,11 @@ public class CommunicatorWithClients extends Thread{
     public Boolean clientExited = false;
     private WrongCommand wrongCommand = new WrongCommand();
     private StartCommand startCommand = new StartCommand();
+    private int counter;
 
-    public CommunicatorWithClients (Socket socket) {
+    public CommunicatorWithClients (Socket socket, int counter) {
         this.socket = socket;
+        setCounter(counter);
     }
 
     public void run() {
@@ -79,7 +81,7 @@ public class CommunicatorWithClients extends Thread{
                 }
                 break;
             case "start":
-                executeStart();
+                executeStart(getCounter());
                 break;
             case "stop":
                 stopServer();
@@ -94,7 +96,15 @@ public class CommunicatorWithClients extends Thread{
         wrongCommand.execute(socket);
     }
 
-    private void executeStart() {
-        startCommand.execute(socket);
+    private void executeStart(int counter) {
+        startCommand.execute(socket, counter);
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 }
