@@ -1,5 +1,7 @@
 package graphic;
 
+import com.server.graph.BipartiteGraph;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
@@ -8,6 +10,7 @@ public class UpperPanel extends JPanel{
     JButton generate;
     JSpinner spinner;
     JButton solveAndSave;
+    BipartiteGraph graph;
 
     public UpperPanel(GraphicApplication graphicApplication) {
         this.graphicApplication = graphicApplication;
@@ -28,11 +31,18 @@ public class UpperPanel extends JPanel{
     }
 
     private void addConnectionsAndSave(ActionEvent actionEvent) {
+        //apelare cupid
+        //afisare perechi
     }
 
     private void generatePreferences(ActionEvent actionEvent) {
+        graph = new BipartiteGraph();
+
         graphicApplication.canvas.init(getCouplesNo());
         SwingUtilities.updateComponentTreeUI(graphicApplication);
+
+        graph.generateRandom((Integer) spinner.getValue());
+        //apelare functie care afsieaza preferintele din graph
     }
 
     public int getCouplesNo(){

@@ -7,7 +7,7 @@ public class Canvas extends JPanel {
 
     private final GraphicApplication graphicApplication;
 
-    int canvasWidth = 800, canvasHeight = 800;
+    int canvasWidth = 700, canvasHeight = 700;
 
     int circleSize = 30;
     int padding = 40;
@@ -23,6 +23,7 @@ public class Canvas extends JPanel {
 
         setPreferredSize(new Dimension(canvasWidth, canvasHeight));
     }
+
     @Override
     protected void paintComponent(Graphics graphics) {
         Graphics2D g = (Graphics2D) graphics;
