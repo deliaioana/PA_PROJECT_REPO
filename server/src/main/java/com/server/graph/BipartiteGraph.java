@@ -9,16 +9,18 @@ import java.util.stream.IntStream;
 public class BipartiteGraph {
     private List<Woman> women = new ArrayList<>();
     private List<Man> men = new ArrayList<>();
+    private int numberOfFreeMen;
     private int numberOfPairs;
 
     public void generateRandom(int size){
         setNumberOfPairs(size);
+        setNumberOfFreeMen(size);
 
         IntStream womenStream = IntStream.rangeClosed(1, size);
-        setWomen(womenStream.mapToObj(index -> new Woman((char)(index + 64))).collect(Collectors.toList()));
+        setWomen(womenStream.mapToObj(index -> new Woman((String.valueOf((char) (index + 64))))).collect(Collectors.toList()));
 
         IntStream menStream = IntStream.rangeClosed(1, size);
-        setMen(menStream.mapToObj(index -> new Man((((Integer) index).toString().charAt(0)))).collect(Collectors.toList()));
+        setMen(menStream.mapToObj(index -> new Man((((Integer) index).toString()))).collect(Collectors.toList()));
 
         assignRandomPreferencesForWomen();
         assignRandomPreferencesForMen();
@@ -98,5 +100,25 @@ public class BipartiteGraph {
                 ", men=" + men +
                 ", numberOfPairs=" + numberOfPairs +
                 '}';
+    }
+
+    public int getNumberOfFreeMen() {
+        return numberOfFreeMen;
+    }
+
+    public void setNumberOfFreeMen(int numberOfFreeMen) {
+        this.numberOfFreeMen = numberOfFreeMen;
+    }
+
+    public void printPairings() {
+        System.out.println("Men ------ Women");
+        for (Man man : men) {
+            if(man.getPartner() != null) {
+                System.out.println(man.name + "   ------   " + man.getPartner());
+            }
+            else {
+                System.out.println(man.name + "   ------   " + "null");
+            }
+        }
     }
 }
