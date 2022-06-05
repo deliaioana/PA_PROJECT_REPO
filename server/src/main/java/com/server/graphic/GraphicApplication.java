@@ -11,9 +11,9 @@ import javax.swing.*;
 import static java.awt.BorderLayout.*;
 
 public class GraphicApplication extends JFrame {
-    UpperPanel upperPanel;
-    LowerPanel lowerPanel;
-    Canvas canvas;
+    public UpperPanel upperPanel;
+    public LowerPanel lowerPanel;
+    public Canvas canvas;
     private BipartiteGraph graph = new BipartiteGraph();
     private ICaller addCaller = new AddCaller();
     private ICaller loadCaller = new LoadCaller();
