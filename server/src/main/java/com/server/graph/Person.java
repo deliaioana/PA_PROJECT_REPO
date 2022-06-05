@@ -47,4 +47,20 @@ public abstract class Person <T>{
                 ", partner=" + partnerName +
                 '}';
     }
+
+    public String getJson(){
+        StringBuilder info = new StringBuilder();
+        info.append("-name.").append(name).append(".partnerName.")
+                .append(partnerName).append(".preferences.").append(getPreferencesAsJson())
+                .append(".-");
+        return info.toString();
+    }
+
+    private String getPreferencesAsJson() {
+        StringBuilder info = new StringBuilder();
+        for (T person : orderedPreferences) {
+            info.append(((Person)person).getName()).append("_");
+        }
+        return info.toString();
+    }
 }

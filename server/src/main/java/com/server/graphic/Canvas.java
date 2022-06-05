@@ -14,6 +14,7 @@ public class Canvas extends JPanel {
     int circleSize = 30;
     int padding = 40;
     private boolean solvePressed = false;
+    private boolean generatePressed = false;
     private int couplesNo;
 
 
@@ -44,16 +45,29 @@ public class Canvas extends JPanel {
     private void paintPreferences(Graphics2D g) {
         int centerLabel = g.getFontMetrics().stringWidth("L") / 2;
 
-        for (int row = 0; row < couplesNo; row++) {
-            String manPreferences = graphicApplication.getGraph().getMen().get(row).getPreferencesAsString();
-            String womanPreferences = graphicApplication.getGraph().getWomen().get(row).getPreferencesAsString();
-            int y = row * (canvasHeight - 2 * padding) / (couplesNo - 1) + padding;
+        if(couplesNo == 1) {
+            String manPreferences = graphicApplication.getGraph().getMen().get(0).getPreferencesAsString();
+            String womanPreferences = graphicApplication.getGraph().getWomen().get(0).getPreferencesAsString();
+            int y = (canvasHeight - 2 * padding) / 2 + padding;
 
             g.setColor(Color.BLACK);
             g.drawString(manPreferences, padding, y + centerLabel);
             g.drawString(womanPreferences, canvasWidth - padding - g.getFontMetrics().stringWidth(womanPreferences) , y + centerLabel);
 
         }
+        else {
+            for (int row = 0; row < couplesNo; row++) {
+                String manPreferences = graphicApplication.getGraph().getMen().get(row).getPreferencesAsString();
+                String womanPreferences = graphicApplication.getGraph().getWomen().get(row).getPreferencesAsString();
+                int y = row * (canvasHeight - 2 * padding) / (couplesNo - 1) + padding;
+
+                g.setColor(Color.BLACK);
+                g.drawString(manPreferences, padding, y + centerLabel);
+                g.drawString(womanPreferences, canvasWidth - padding - g.getFontMetrics().stringWidth(womanPreferences) , y + centerLabel);
+
+            }
+        }
+
     }
 
     private void paintCouples(Graphics2D g) {
@@ -88,16 +102,26 @@ public class Canvas extends JPanel {
     }
 
     public void paintConnections(Graphics2D g) {
-        for (Man man : graphicApplication.getGraph().getMen()) {
+        if(couplesNo == 1) {
             int x1 = canvasWidth/3 + circleSize/2;
-            int y1 = (Integer.parseInt(man.getName())-1) * (canvasHeight - 2 * padding) / (couplesNo - 1) + padding;
+            int y1 = (canvasHeight - 2 * padding) / 2 + padding;
             int x2 = canvasWidth * 2/3 - circleSize/2;
-
-            char letter = man.getPartner().charAt(0);
-            int y2 = (letter-65) * (canvasHeight - 2 * padding) / (couplesNo - 1) + padding;
             g.setColor(Color.BLACK);
-            g.drawLine(x1, y1, x2, y2) ;
+            g.drawLine(x1, y1, x2, y1) ;
         }
+        else {
+            for (Man man : graphicApplication.getGraph().getMen()) {
+                int x1 = canvasWidth/3 + circleSize/2;
+                int y1 = (Integer.parseInt(man.getName())-1) * (canvasHeight - 2 * padding) / (couplesNo - 1) + padding;
+                int x2 = canvasWidth * 2/3 - circleSize/2;
+
+                char letter = man.getPartner().charAt(0);
+                int y2 = (letter-65) * (canvasHeight - 2 * padding) / (couplesNo - 1) + padding;
+                g.setColor(Color.BLACK);
+                g.drawLine(x1, y1, x2, y2) ;
+            }
+        }
+
     }
 
     public boolean getSolvePressed(){
@@ -106,5 +130,13 @@ public class Canvas extends JPanel {
 
     public void setSolvePressed(boolean solvePressed){
         this.solvePressed = solvePressed;
+    }
+
+    public boolean getGeneratePressed() {
+        return generatePressed;
+    }
+
+    public void setGeneratePressed(boolean generatePressed) {
+        this.generatePressed = generatePressed;
     }
 }

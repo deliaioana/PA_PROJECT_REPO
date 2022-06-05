@@ -1,5 +1,9 @@
 package com.server.graphic;
 
+import com.server.apiCallers.AddCaller;
+import com.server.apiCallers.ICaller;
+import com.server.apiCallers.LoadCaller;
+import com.server.apis.AddController;
 import com.server.graph.BipartiteGraph;
 
 import javax.swing.*;
@@ -11,6 +15,12 @@ public class GraphicApplication extends JFrame {
     LowerPanel lowerPanel;
     Canvas canvas;
     private BipartiteGraph graph = new BipartiteGraph();
+    private ICaller addCaller = new AddCaller();
+    private ICaller loadCaller = new LoadCaller();
+
+    public String getInfoAsString() {
+        return graph.getInfoAsJson(); //de impl
+    }
 
     public GraphicApplication(int panelNo) {
         super("Application number " + panelNo);
@@ -38,5 +48,21 @@ public class GraphicApplication extends JFrame {
 
     public void setGraph(BipartiteGraph graph) {
         this.graph = graph;
+    }
+
+    public ICaller getAddCaller() {
+        return addCaller;
+    }
+
+    public void setAddCaller(ICaller addCaller) {
+        this.addCaller = addCaller;
+    }
+
+    public ICaller getLoadCaller() {
+        return loadCaller;
+    }
+
+    public void setLoadCaller(ICaller loadCaller) {
+        this.loadCaller = loadCaller;
     }
 }
