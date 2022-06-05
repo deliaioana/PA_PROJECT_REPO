@@ -20,5 +20,15 @@ public class ServerApplication {
     ConfigurableApplicationContext context = builder.run(args);
 
     new Server(6666);
+
+        /*BipartiteGraph graph = new BipartiteGraph();
+        graph.generateRandom(20);
+        new Cupid(graph);
+        String info = graph.getInfoAsJson();
+        //System.out.println(info);
+
+        BipartiteGraph graph2 = new BipartiteGraph();
+        graph2.loadGraphFromString(info);
+        System.out.println(graph2.getInfoAsJson());*/
     }
 }
