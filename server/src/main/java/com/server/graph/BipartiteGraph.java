@@ -154,5 +154,108 @@ public class BipartiteGraph {
 
     public void loadGraphFromString(String info) {
         System.out.println("Se va face load la graph din stringul: \n" + info);
+        cleanAll();
+
+        parseIntValues(info);
+        parsePreferences(info);
+    }
+
+    private void parsePreferences(String info) {
+        String[] infoArray = info.split("\\.");
+        int elementIndex = 5;
+
+        int womanIndex = 1;
+        while(womanIndex <= numberOfPairs) {
+            String name = infoArray[elementIndex];
+            Woman woman = getWomanByName(name);
+            String[] preferences = infoArray[elementIndex+4].split("_");
+
+            for (String manName : preferences) {
+                Man man = getManByName(manName);
+                woman.getOrderedPreferences().add(man);
+            }
+
+            elementIndex += 6;
+            ++womanIndex;
+        }
+
+        //men
+        int manIndex = 1;
+        while(manIndex <= numberOfPairs) {
+            String name = infoArray[elementIndex];
+            Man man = getManByName(name);
+            String[] preferences = infoArray[elementIndex+4].split("_");
+
+            for (String womanName : preferences) {
+                Woman woman = getWomanByName(womanName);
+                man.getOrderedPreferences().add(woman);
+            }
+
+            elementIndex += 6;
+            ++manIndex;
+        }
+    }
+
+    private Man getManByName(String name) {
+        for (Man man : men) {
+            if(man.getName().equals(name)) {
+                return man;
+            }
+        }
+        return null;
+    }
+
+    private Woman getWomanByName(String name) {
+        for (Woman woman : women) {
+            if(woman.getName().equals(name)) {
+                return woman;
+            }
+        }
+        return null;
+    }
+
+    private void parseIntValues(String info) {
+        int numberOfFreeMen;
+        int numberOfPairs;
+        int elementIndex = 0;
+
+        String[] infoArray = info.split("\\.");
+
+        numberOfPairs = Integer.parseInt(infoArray[1]);
+        numberOfFreeMen = Integer.parseInt(infoArray[3]);
+
+        setNumberOfFreeMen(numberOfFreeMen);
+        setNumberOfPairs(numberOfPairs);
+
+        elementIndex = 5;
+
+        //women
+        int womanIndex = 1;
+        while(womanIndex <= numberOfPairs) {
+            String name = infoArray[elementIndex];
+            Woman woman = new Woman(name);
+            women.add(woman);
+            woman.setPartner(infoArray[elementIndex+2]);
+            elementIndex += 6;
+            ++womanIndex;
+        }
+
+        //men
+        int manIndex = 1;
+        while(manIndex <= numberOfPairs) {
+            String name = infoArray[elementIndex];
+            Man man = new Man(name);
+            men.add(man);
+            man.setPartner(infoArray[elementIndex+2]);
+            elementIndex += 6;
+            ++manIndex;
+        }
+    }
+
+    private void cleanAll() {
+        setWomen(new ArrayList<>());
+        setMen(new ArrayList<>());
+        setNumberOfPairs(0);
+        setNumberOfFreeMen(0);
     }
 }
