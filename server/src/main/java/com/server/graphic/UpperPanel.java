@@ -1,9 +1,11 @@
 package com.server.graphic;
 
+import com.server.apis.AddController;
 import com.server.graph.BipartiteGraph;
 import com.server.graph.Cupid;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
@@ -12,6 +14,7 @@ public class UpperPanel extends JPanel{
     JButton generate;
     JSpinner spinner;
     JButton solveAndSave;
+    private boolean spinnerChanged;
 
 
     public UpperPanel(GraphicApplication graphicApplication) {
@@ -30,27 +33,44 @@ public class UpperPanel extends JPanel{
 
         generate.addActionListener(this :: generatePreferences);
         solveAndSave.addActionListener(this :: addConnectionsAndSave);
+        spinner.addChangeListener(this :: isChangedSpinner);
+    }
+
+    private void isChangedSpinner(ChangeEvent changeEvent) {
+        if(((int) spinner.getValue()) == 1) {
+            System.out.println("sa apasat 1");
+        }
+        if(!graphicApplication.canvas.getGeneratePressed()) {
+            setSpinnerChanged(true);
+        }
     }
 
     private void addConnectionsAndSave(ActionEvent actionEvent) {
-        graphicApplication.canvas.setSolvePressed(true);
+        if(isSpinnerChanged()) {
+            generatePreferences(actionEvent);
+            setSpinnerChanged(false);
+        }
 
-        //generatePreferences(actionEvent);
+        graphicApplication.canvas.setSolvePressed(true);
+        graphicApplication.canvas.setGeneratePressed(false);
 
         new Cupid(graphicApplication.getGraph());
         showPairings(graphicApplication.getGraph());
 
         graphicApplication.canvas.init(getCouplesNo());
         SwingUtilities.updateComponentTreeUI(graphicApplication);
+
+        graphicApplication.getAddCaller().setGraphicApplication(graphicApplication);
+        graphicApplication.getAddCaller().execute();
     }
 
     private void showPairings(BipartiteGraph graph) {
-        // de implementat afisarea perechilor person - partner
         graph.printPairings();
     }
 
     private void generatePreferences(ActionEvent actionEvent) {
 
+        graphicApplication.canvas.setGeneratePressed(true);
         graphicApplication.canvas.setSolvePressed(false);
 
         graphicApplication.setGraph(new BipartiteGraph());
@@ -66,5 +86,11 @@ public class UpperPanel extends JPanel{
     }
 
 
+    public boolean isSpinnerChanged() {
+        return spinnerChanged;
+    }
 
+    public void setSpinnerChanged(boolean spinnerChanged) {
+        this.spinnerChanged = spinnerChanged;
+    }
 }

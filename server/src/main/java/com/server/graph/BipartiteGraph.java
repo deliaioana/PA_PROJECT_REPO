@@ -121,4 +121,34 @@ public class BipartiteGraph {
             }
         }
     }
+
+    public String getInfoAsJson() {
+        StringBuilder info = new StringBuilder();
+
+        info.append("{numberOfPairs:").append(numberOfPairs).append(",numberOfFreeMen:")
+                .append(numberOfFreeMen).append(",women:[").append(getWomenAsJson())
+                .append("],men:[").append(getMenAsJson()).append("]}");
+
+        return info.toString();
+    }
+
+    private String getMenAsJson() {
+        StringBuilder info = new StringBuilder();
+
+        for (Man man : men) {
+            info.append(man.getJson()).append("+");
+        }
+
+        return info.toString();
+    }
+
+    private String getWomenAsJson() {
+        StringBuilder info = new StringBuilder();
+
+        for (Woman woman : women) {
+            info.append(woman.getJson()).append("+");
+        }
+
+        return info.toString();
+    }
 }
