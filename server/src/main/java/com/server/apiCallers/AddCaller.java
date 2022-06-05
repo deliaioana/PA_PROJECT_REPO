@@ -24,8 +24,6 @@ public class AddCaller implements ICaller{
         String addUrl = url + graphicApplication.getInfoAsString();
         HttpPost httppost = new HttpPost(addUrl);
 
-        System.out.println(addUrl);
-
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
              CloseableHttpResponse response = httpClient.execute(httppost)) {
 

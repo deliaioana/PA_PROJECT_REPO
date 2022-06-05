@@ -37,9 +37,6 @@ public class UpperPanel extends JPanel{
     }
 
     private void isChangedSpinner(ChangeEvent changeEvent) {
-        if(((int) spinner.getValue()) == 1) {
-            System.out.println("sa apasat 1");
-        }
         if(!graphicApplication.canvas.getGeneratePressed()) {
             setSpinnerChanged(true);
         }
@@ -55,7 +52,7 @@ public class UpperPanel extends JPanel{
         graphicApplication.canvas.setGeneratePressed(false);
 
         new Cupid(graphicApplication.getGraph());
-        showPairings(graphicApplication.getGraph());
+        //showPairings(graphicApplication.getGraph());
 
         graphicApplication.canvas.init(getCouplesNo());
         SwingUtilities.updateComponentTreeUI(graphicApplication);
