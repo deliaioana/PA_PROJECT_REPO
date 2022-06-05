@@ -18,7 +18,13 @@ public class AboutPopUp extends JFrame {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setPreferredSize(new Dimension(400, 400));
 
-        JLabel applicationRules = new JLabel("Aici text \n Scris frumos");
+        String aboutText = "<html>The Stable Marriage Problem states that given N men and N women, " +
+                "where each person has ranked all members of the opposite sex in order of preference, " +
+                "marry the men and women together such that there are no two people of opposite sex " +
+                "who would both rather have each other than their current partners. If there are no " +
+                "such people, all the marriages are “stable” (Source Wiki)</html>";
+
+        JLabel applicationRules = new JLabel(aboutText);
         JButton exitButton = new JButton("Exit");
 
         add(applicationRules, CENTER);

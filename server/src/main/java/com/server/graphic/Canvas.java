@@ -13,9 +13,12 @@ public class Canvas extends JPanel {
     int canvasWidth = 1000, canvasHeight = 700;
     int circleSize = 30;
     int padding = 40;
-    private boolean solvePressed = false;
-    private boolean generatePressed = false;
+    /*private boolean solvePressed = false;
+    private boolean generatePressed = false;*/
     private int couplesNo;
+    private boolean edgesNeedToBeDrawn = false;
+    private boolean nodesNeedToBeDrawn = true;
+    private boolean loadWasPressed = false;
 
 
     public Canvas(GraphicApplication graphicApplication) {
@@ -25,7 +28,10 @@ public class Canvas extends JPanel {
 
     public void init(int couplesNo) {
         this.couplesNo = couplesNo;
-
+        if(loadWasPressed) {
+            graphicApplication.upperPanel.spinner.setValue(graphicApplication.getGraph().getNumberOfPairs());
+            setCouplesNo(graphicApplication.getGraph().getNumberOfPairs());
+        }
         setPreferredSize(new Dimension(canvasWidth, canvasHeight));
     }
 
@@ -34,12 +40,22 @@ public class Canvas extends JPanel {
         Graphics2D g = (Graphics2D) graphics;
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, canvasWidth, canvasHeight);
-        paintCouples(g);
-        paintPreferences(g);
 
-        if(solvePressed){
+        if(isNodesNeedToBeDrawn()) {
+            paintCouples(g);
+            paintPreferences(g);
+        }
+
+        if(isEdgesNeedToBeDrawn()) {
             paintConnections(g);
         }
+
+        setNodesNeedToBeDrawn(false);
+        setEdgesNeedToBeDrawn(false);
+
+        /*if(solvePressed){
+            paintConnections(g);
+        }*/
     }
 
     private void paintPreferences(Graphics2D g) {
@@ -97,8 +113,6 @@ public class Canvas extends JPanel {
                 g.drawString(String.valueOf(girlName), canvasWidth * 2 / 3 - centerLabel, y + centerLabel);
             }
         }
-
-
     }
 
     public void paintConnections(Graphics2D g) {
@@ -121,10 +135,9 @@ public class Canvas extends JPanel {
                 g.drawLine(x1, y1, x2, y2) ;
             }
         }
-
     }
 
-    public boolean getSolvePressed(){
+    /*public boolean getSolvePressed(){
         return solvePressed;
     }
 
@@ -138,5 +151,33 @@ public class Canvas extends JPanel {
 
     public void setGeneratePressed(boolean generatePressed) {
         this.generatePressed = generatePressed;
+    }*/
+
+    public boolean isEdgesNeedToBeDrawn() {
+        return edgesNeedToBeDrawn;
+    }
+
+    public void setEdgesNeedToBeDrawn(boolean edgesNeedToBeDrawn) {
+        this.edgesNeedToBeDrawn = edgesNeedToBeDrawn;
+    }
+
+    public boolean isNodesNeedToBeDrawn() {
+        return nodesNeedToBeDrawn;
+    }
+
+    public void setNodesNeedToBeDrawn(boolean nodesNeedToBeDrawn) {
+        this.nodesNeedToBeDrawn = nodesNeedToBeDrawn;
+    }
+
+    public boolean isLoadWasPressed() {
+        return loadWasPressed;
+    }
+
+    public void setLoadWasPressed(boolean loadWasPressed) {
+        this.loadWasPressed = loadWasPressed;
+    }
+
+    public void setCouplesNo(int value) {
+        couplesNo = value;
     }
 }

@@ -50,24 +50,41 @@ public class UpperPanel extends JPanel{
     }
 
     private void loadGraphFromID(ActionEvent actionEvent) {
+        graphicApplication.canvas.setLoadWasPressed(true);
         graphicApplication.getLoadCaller().setGraphicApplication(graphicApplication);
         graphicApplication.getLoadCaller().execute();
+
+        graphicApplication.canvas.setEdgesNeedToBeDrawn(true);
+        graphicApplication.canvas.setNodesNeedToBeDrawn(true);
+
+        graphicApplication.canvas.init(getCouplesNo());
+        SwingUtilities.updateComponentTreeUI(graphicApplication);
     }
 
     private void isChangedSpinner(ChangeEvent changeEvent) {
-        if(!graphicApplication.canvas.getGeneratePressed()) {
+        /*if(!graphicApplication.canvas.getGeneratePressed()) {
             setSpinnerChanged(true);
-        }
+        }*/
+
+        graphicApplication.canvas.setNodesNeedToBeDrawn(true);
+
     }
 
     private void addConnectionsAndSave(ActionEvent actionEvent) {
-        if(isSpinnerChanged()) {
+        /*if(isSpinnerChanged()) {
             generatePreferences(actionEvent);
             setSpinnerChanged(false);
+        }*/
+
+        /*graphicApplication.canvas.setSolvePressed(true);
+        graphicApplication.canvas.setGeneratePressed(false);*/
+
+        if(graphicApplication.canvas.isNodesNeedToBeDrawn()) {
+            generatePreferences(actionEvent);
         }
 
-        graphicApplication.canvas.setSolvePressed(true);
-        graphicApplication.canvas.setGeneratePressed(false);
+        graphicApplication.canvas.setEdgesNeedToBeDrawn(true);
+        graphicApplication.canvas.setNodesNeedToBeDrawn(true);
 
         new Cupid(graphicApplication.getGraph());
         //showPairings(graphicApplication.getGraph());
@@ -85,8 +102,11 @@ public class UpperPanel extends JPanel{
 
     private void generatePreferences(ActionEvent actionEvent) {
 
-        graphicApplication.canvas.setGeneratePressed(true);
-        graphicApplication.canvas.setSolvePressed(false);
+        /*graphicApplication.canvas.setGeneratePressed(true);
+        graphicApplication.canvas.setSolvePressed(false);*/
+
+        graphicApplication.canvas.setNodesNeedToBeDrawn(true);
+        graphicApplication.canvas.setEdgesNeedToBeDrawn(false);
 
         graphicApplication.setGraph(new BipartiteGraph());
 
