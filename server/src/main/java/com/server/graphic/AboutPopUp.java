@@ -15,7 +15,7 @@ public class AboutPopUp extends JFrame {
     }
 
     private void init() {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         setPreferredSize(new Dimension(400, 400));
 
         JLabel applicationRules = new JLabel("Aici text \n Scris frumos");
