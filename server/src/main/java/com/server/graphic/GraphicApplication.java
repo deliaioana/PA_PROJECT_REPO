@@ -28,7 +28,7 @@ public class GraphicApplication extends JFrame {
     }
 
     private void init() {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE );
 
         upperPanel = new UpperPanel(this);
         lowerPanel = new LowerPanel(this);
