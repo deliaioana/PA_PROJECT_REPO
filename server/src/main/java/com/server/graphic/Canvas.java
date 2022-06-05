@@ -23,7 +23,7 @@ public class Canvas extends JPanel {
         init(graphicApplication.upperPanel.getCouplesNo());
     }
 
-    final void init(int couplesNo) {
+    public void init(int couplesNo) {
         this.couplesNo = couplesNo;
 
         setPreferredSize(new Dimension(canvasWidth, canvasHeight));

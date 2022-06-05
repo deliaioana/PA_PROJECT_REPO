@@ -16,11 +16,12 @@ public class LoadController {
 
     @PostMapping("/load/{id}")
     public String load(@PathVariable Integer id) {
+        String solutionJSON = "";
 
         try{
             Connection connection = Database.getConnection();
 
-            String solutionJSON = "";
+
             CallableStatement stmt = connection.prepareCall("{call get_sol(?,?)}");
             stmt.setInt(1, id);
             stmt.registerOutParameter(2, Types.LONGNVARCHAR);
@@ -48,6 +49,6 @@ public class LoadController {
             e.printStackTrace();
             return "failed";
         }
-        return "success";
+        return solutionJSON;
     }
 }

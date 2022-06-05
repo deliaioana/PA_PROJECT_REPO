@@ -21,6 +21,8 @@ public class ServerApplication {
 
     new Server(6666);
 
+
+
         /*BipartiteGraph graph = new BipartiteGraph();
         graph.generateRandom(20);
         new Cupid(graph);

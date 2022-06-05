@@ -16,7 +16,7 @@ public class UpperPanel extends JPanel{
     JButton load;
     JLabel loadLabel;
     JSpinner spinner;
-    JSpinner loadSpinner;
+    private JSpinner loadSpinner;
     JButton solveAndSave;
     private boolean spinnerChanged;
 
@@ -50,7 +50,8 @@ public class UpperPanel extends JPanel{
     }
 
     private void loadGraphFromID(ActionEvent actionEvent) {
-
+        graphicApplication.getLoadCaller().setGraphicApplication(graphicApplication);
+        graphicApplication.getLoadCaller().execute();
     }
 
     private void isChangedSpinner(ChangeEvent changeEvent) {
@@ -106,5 +107,9 @@ public class UpperPanel extends JPanel{
 
     public void setSpinnerChanged(boolean spinnerChanged) {
         this.spinnerChanged = spinnerChanged;
+    }
+
+    public int getLoadSpinnerValue(){
+        return (int)loadSpinner.getValue();
     }
 }

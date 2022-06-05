@@ -16,7 +16,7 @@ public class LoadCaller implements ICaller{
 
     @Override
     public void execute() {
-        int id = 0;
+        int id = graphicApplication.upperPanel.getLoadSpinnerValue();
         String loadUrl = url + id;
         HttpPost httppost = new HttpPost(loadUrl);
 
@@ -24,6 +24,8 @@ public class LoadCaller implements ICaller{
              CloseableHttpResponse response = httpClient.execute(httppost)) {
 
             graphicApplication.getGraph().loadGraphFromString(EntityUtils.toString(response.getEntity()));
+            graphicApplication.canvas.init(graphicApplication.getGraph().getNumberOfPairs());
+
         }
         catch (IOException e) {
             e.printStackTrace();
