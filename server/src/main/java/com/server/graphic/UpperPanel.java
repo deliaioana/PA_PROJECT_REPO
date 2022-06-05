@@ -12,7 +12,11 @@ import java.awt.event.ActionEvent;
 public class UpperPanel extends JPanel{
     final GraphicApplication graphicApplication;
     JButton generate;
+    JLabel generateLabel;
+    JButton load;
+    JLabel loadLabel;
     JSpinner spinner;
+    JSpinner loadSpinner;
     JButton solveAndSave;
     private boolean spinnerChanged;
 
@@ -24,16 +28,29 @@ public class UpperPanel extends JPanel{
 
     private void init() {
         generate = new JButton("Generate");
+        load = new JButton("Load");
         spinner = new JSpinner (new SpinnerNumberModel(5, 1, 20, 1));
+        loadSpinner = new JSpinner (new SpinnerNumberModel(5, 1, 30, 1));
+        generateLabel = new JLabel("GenerateNo");
+        loadLabel = new JLabel("ID");
         solveAndSave = new JButton("Solve and Save");
 
         add(generate);
+        add(generateLabel); //can be deleted
         add(spinner);
+        add(load);
+        add(loadLabel); //can be deleted
+        add(loadSpinner);
         add(solveAndSave);
 
         generate.addActionListener(this :: generatePreferences);
+        load.addActionListener((this :: loadGraphFromID));
         solveAndSave.addActionListener(this :: addConnectionsAndSave);
         spinner.addChangeListener(this :: isChangedSpinner);
+    }
+
+    private void loadGraphFromID(ActionEvent actionEvent) {
+
     }
 
     private void isChangedSpinner(ChangeEvent changeEvent) {

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 public class LowerPanel extends JPanel{
 
     final GraphicApplication graphicApplication;
+
     //JButton exitBtn = new JButton("Exit");
 
     public LowerPanel(GraphicApplication graphicApplication) {
@@ -22,11 +23,14 @@ public class LowerPanel extends JPanel{
         add(aboutButton);
         add(exitButton);
         exitButton.addActionListener(this::exitGame);
-        exitButton.addActionListener(this::aboutGame);
+        aboutButton.addActionListener(this::showDetails);
 
     }
 
-    private void aboutGame(ActionEvent actionEvent) {
+    private void showDetails(ActionEvent actionEvent) {
+        AboutPopUp aboutPopUp = new AboutPopUp();
+        //aboutPopUp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        aboutPopUp.setVisible(true);
 
     }
 
